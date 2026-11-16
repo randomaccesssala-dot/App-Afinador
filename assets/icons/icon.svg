@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs>
+<radialGradient id="bg" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#587187" stop-opacity=".42"/><stop offset=".6" stop-color="#587187" stop-opacity=".08"/><stop offset="1" stop-color="#587187" stop-opacity="0"/></radialGradient>
+<linearGradient id="cr" gradientUnits="userSpaceOnUse" x1="0" y1="66" x2="0" y2="150"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#E4E5E7"/><stop offset="1" stop-color="#8E9096"/></linearGradient>
+<radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#49C7EA" stop-opacity=".5"/><stop offset="1" stop-color="#49C7EA" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="512" height="512" fill="#0B0B0D"/>
+<rect width="512" height="512" fill="url(#bg)"/>
+<g transform="translate(256.0 256.0) scale(1.0) translate(-256.0 -256.0)">
+<line x1="256" y1="70" x2="256" y2="116" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(-17.0 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(-13.600000000000001 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(-10.2 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(-6.800000000000001 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(-3.4000000000000004 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(3.4000000000000004 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(6.800000000000001 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(10.2 256 700)"/><line x1="256" y1="70" x2="256" y2="104" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(13.600000000000001 256 700)"/><line x1="256" y1="70" x2="256" y2="116" stroke="url(#cr)" stroke-width="11" stroke-linecap="round" transform="rotate(17.0 256 700)"/>
+<circle cx="256" cy="298" r="170" fill="url(#halo)"/>
+<path d="M256,108C269.617,246.32 304.416,283.465 434,298C304.416,312.535 269.617,349.68 256,488C242.383,349.68 207.584,312.535 78,298C207.584,283.465 242.383,246.32 256,108Z" fill="#1D222B"/>
+<path d="M256,160C265.79200000000003,260.464 290.81600000000003,287.443 384,298C290.81600000000003,308.557 265.79200000000003,335.536 256,436C246.208,335.536 221.184,308.557 128,298C221.184,287.443 246.208,260.464 256,160Z" fill="#2B3440"/>
+<path d="M256,214C261.967,275.152 277.216,291.574 334,298C277.216,304.426 261.967,320.848 256,382C250.033,320.848 234.784,304.426 178,298C234.784,291.574 250.033,275.152 256,214Z" fill="#49C7EA"/>
+</g>
+</svg>

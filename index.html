@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Random Tune — Afinador de guitarra y bajo</title>
+  <meta name="description" content="Afinador de guitarra y bajo con el micrófono. Gratis, sin publicidad y sin instalar nada. De Random Access, sala de ensayo.">
+  <meta name="theme-color" content="#0B0B0D">
+  <meta name="color-scheme" content="dark">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Random Tune">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Random Tune — Afinador de guitarra y bajo">
+  <meta property="og:description" content="Afiná con el micrófono. Gratis y sin publicidad. De Random Access, sala de ensayo.">
+  <meta property="og:image" content="https://randomaccesssala-dot.github.io/App-Afinador/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="assets/fonts/BricolageGrotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Símbolos compartidos -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-destello" viewBox="-12 -12 24 24">
+        <path d="M0-12C.9-3.6 3.6-.9 12 0 3.6.9.9 3.6 0 12-.9 3.6-3.6.9-12 0-3.6-.9-.9-3.6 0-12Z"/>
+      </symbol>
+      <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 15V3.5M7.5 7.5 12 3l4.5 4.5M6 11H5a1.5 1.5 0 0 0-1.5 1.5v7A1.5 1.5 0 0 0 5 21h14a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 19 11h-1"/>
+      </symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m7 10 5 5 5-5"/>
+      </symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/>
+      </symbol>
+      <symbol id="i-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4ZM15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11"/>
+      </symbol>
+      <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="m6 6 12 12M18 6 6 18"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="app" id="app" data-state="idle" data-tune="none" data-instrument="guitar">
+    <header class="top">
+      <button class="icon-btn" id="btnShare" type="button" aria-label="Compartir Random Tune">
+        <svg><use href="#i-share"/></svg>
+      </button>
+      <div class="lockup">
+        <h1 class="wordmark"><img src="assets/wordmark.svg" alt="Random Tune" width="443" height="100"></h1>
+        <p class="eyebrow">Afinador</p>
+        <svg class="spark spark-a" aria-hidden="true"><use href="#i-destello"/></svg>
+        <svg class="spark spark-b" aria-hidden="true"><use href="#i-destello"/></svg>
+      </div>
+      <button class="icon-btn" id="btnSettings" type="button" aria-label="Ajustes">
+        <svg><use href="#i-sliders"/></svg>
+      </button>
+    </header>
+
+    <div class="setup">
+      <div class="modes" role="group" aria-label="Instrumento">
+        <button type="button" class="mode" data-instrument="guitar" aria-pressed="true">Guitarra</button>
+        <button type="button" class="mode" data-instrument="bass" aria-pressed="false">Bajo</button>
+        <button type="button" class="mode" data-instrument="chromatic" aria-pressed="false">Cromático</button>
+      </div>
+      <button class="tuning" id="btnTuning" type="button" aria-haspopup="dialog">
+        <span class="tuning-name" id="tuningName">Estándar</span>
+        <span class="tuning-notes" id="tuningNotes">E A D G B E</span>
+        <svg class="tuning-chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </button>
+    </div>
+
+    <main class="stage">
+      <div class="glow" aria-hidden="true"></div>
+      <svg class="gauge" id="gauge" viewBox="0 0 320 118" aria-hidden="true">
+        <g transform="translate(160 13)"><path class="gauge-star" d="M0-11C.8-3.3 3.3-.8 11 0 3.3.8.8 3.3 0 11-.8 3.3-3.3.8-11 0-3.3-.8-.8-3.3 0-11Z"/></g>
+        <g id="ticks"></g>
+        <text class="gauge-end" x="13" y="112" text-anchor="middle">♭</text>
+        <text class="gauge-end" x="307" y="112" text-anchor="middle">♯</text>
+        <line class="needle" id="needle" x1="160" y1="30" x2="160" y2="78"/>
+      </svg>
+
+      <div class="readout" id="readout">
+        <div class="note is-empty" id="note" aria-hidden="true">
+          <span class="note-base" id="noteBase"></span><span class="note-side"><span class="note-acc" id="noteAcc"></span><span class="note-oct" id="noteOct"></span></span>
+        </div>
+        <p class="meta" aria-hidden="true">
+          <span class="cents" id="cents"></span>
+          <span class="hz" id="hz"></span>
+        </p>
+        <p class="hint" id="hint">Tocá una cuerda</p>
+      </div>
+
+      <div class="start" id="start">
+        <button class="cta" id="btnStart" type="button">
+          <svg aria-hidden="true"><use href="#i-mic"/></svg>
+          <span id="startLabel">Activar micrófono</span>
+        </button>
+        <p class="start-note" id="startNote">El audio se analiza en tu dispositivo. No se graba ni se envía.</p>
+      </div>
+    </main>
+
+    <section class="bottom" aria-label="Cuerdas">
+      <div class="strings" id="strings"></div>
+      <div class="controls">
+        <button class="chip" id="btnAuto" type="button" aria-pressed="true">
+          <span class="chip-dot" aria-hidden="true"></span><span>Auto</span>
+        </button>
+        <button class="chip" id="btnTone" type="button" aria-pressed="false">
+          <svg aria-hidden="true"><use href="#i-sound"/></svg><span id="toneLabel">Escuchar</span>
+        </button>
+      </div>
+    </section>
+
+    <a class="foot" href="https://www.instagram.com/randomaccessok/" target="_blank" rel="noopener">
+      <img src="assets/isotipo-blanco.png" alt="" width="34" height="31">
+      <span>Random Access <i aria-hidden="true">·</i> Sala de ensayo</span>
+    </a>
+
+    <p class="sr-only" id="announce" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- Afinaciones -->
+  <dialog class="sheet" id="sheetTuning" aria-labelledby="sheetTuningTitle">
+    <div class="sheet-body">
+      <header class="sheet-head">
+        <h2 id="sheetTuningTitle">Afinación</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Cerrar"><svg><use href="#i-close"/></svg></button>
+      </header>
+      <ul class="tuning-list" id="tuningList"></ul>
+    </div>
+  </dialog>
+
+  <!-- Ajustes -->
+  <dialog class="sheet" id="sheetSettings" aria-labelledby="sheetSettingsTitle">
+    <div class="sheet-body">
+      <header class="sheet-head">
+        <h2 id="sheetSettingsTitle">Ajustes</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Cerrar"><svg><use href="#i-close"/></svg></button>
+      </header>
+
+      <div class="field">
+        <div class="field-text">
+          <h3>La de referencia</h3>
+          <p>440 Hz es el estándar. Cambialo solo si tocás con un instrumento que no se puede afinar.</p>
+        </div>
+        <div class="stepper" role="group" aria-label="Frecuencia del La de referencia">
+          <button type="button" id="a4Down" aria-label="Bajar 1 Hz">−</button>
+          <output id="a4Value" aria-live="polite">440 Hz</output>
+          <button type="button" id="a4Up" aria-label="Subir 1 Hz">+</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-text">
+          <h3>Nombres de las notas</h3>
+        </div>
+        <div class="segmented" role="group" aria-label="Nombres de las notas">
+          <button type="button" data-notation="en" aria-pressed="true">E A D G</button>
+          <button type="button" data-notation="lat" aria-pressed="false">Mi La Re Sol</button>
+        </div>
+      </div>
+
+      <div class="field" id="fieldVibrate">
+        <div class="field-text">
+          <h3>Vibrar al afinar</h3>
+          <p>Un toque corto cuando la cuerda queda en su nota.</p>
+        </div>
+        <button class="switch" id="vibrate" type="button" role="switch" aria-checked="true" aria-label="Vibrar al afinar"><span></span></button>
+      </div>
+
+      <div class="field" id="fieldInstall" hidden>
+        <div class="field-text">
+          <h3>Usarla como app</h3>
+          <p id="installText">Queda en tu pantalla de inicio y funciona sin conexión.</p>
+        </div>
+        <button class="btn" id="btnInstall" type="button" hidden>Instalar</button>
+      </div>
+
+      <div class="tips">
+        <h3>Para que afine mejor</h3>
+        <ul>
+          <li>Acercá el celular al instrumento y tocá una cuerda sola.</li>
+          <li>Si hay mucho ruido, tocá la cuerda en pantalla para fijarla.</li>
+          <li>En el bajo, si una cuerda grave no se detecta, usá el armónico del traste 12.</li>
+        </ul>
+      </div>
+
+      <p class="about">
+        Random Tune es gratis y no tiene publicidad.<br>
+        Hecho en <a href="https://www.instagram.com/randomaccessok/" target="_blank" rel="noopener">Random Access</a>, sala de ensayo. Resistencia, Chaco.
+      </p>
+    </div>
+  </dialog>
+
+  <!-- Compartir -->
+  <dialog class="sheet" id="sheetShare" aria-labelledby="sheetShareTitle">
+    <div class="sheet-body">
+      <header class="sheet-head">
+        <h2 id="sheetShareTitle">Compartir</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Cerrar"><svg><use href="#i-close"/></svg></button>
+      </header>
+      <div class="share">
+        <div class="qr" id="qr" role="img" aria-label="Código QR con el link de Random Tune"></div>
+        <p class="share-hint">Que escaneen el código con la cámara, o mandales el link.</p>
+        <p class="share-url" id="shareUrl"></p>
+        <div class="share-actions">
+          <button class="btn btn-primary" id="btnShareNative" type="button">Enviar link</button>
+          <button class="btn" id="btnCopy" type="button">Copiar link</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <noscript><p class="noscript">Random Tune necesita JavaScript para escuchar el micrófono.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
